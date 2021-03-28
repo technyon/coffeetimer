@@ -1,19 +1,19 @@
 #include "Arduino.h"
+#include "Display.h"
 
-#define  LED_PIN 2
+Display* display;
 
 void setup()
 {
 	Serial.begin(9600);
 	Serial.println("START");
-	pinMode(LED_PIN, OUTPUT);
+
+	display = new Display();
+	display->initialize();
 }
 
 void loop()
 {
-    digitalWrite(LED_PIN, HIGH);
-    delay(500);
-    digitalWrite(LED_PIN, LOW);
-    delay(500);
-    Serial.println("LOOP");
+    delay(10);
+//    display->update();
 }

@@ -35,3 +35,11 @@ void Display::initialize()
 void Display::update()
 {
 }
+
+void Display::print(long value)
+{
+    _ssd1306.clearDisplay();
+    _ssd1306.setCursor(15, 40);
+    _ssd1306.print(value);
+    _ssd1306.display();
+}

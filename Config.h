@@ -1,0 +1,11 @@
+#pragma once
+
+#define ROTARY_ENCODER_A_PIN 26
+#define ROTARY_ENCODER_B_PIN 25
+#define ROTARY_ENCODER_BUTTON_PIN 33
+#define ROTARY_ENCODER_VCC_PIN -1
+
+//depending on your encoder - try 1,2 or 4 to get expected behaviour
+//#define ROTARY_ENCODER_STEPS 1
+//#define ROTARY_ENCODER_STEPS 2
+#define ROTARY_ENCODER_STEPS 4

@@ -14,6 +14,8 @@ public:
     void initialize();
     void update();
 
+    void print(long i);
+
 private:
 
     bool _isInitialized = false;

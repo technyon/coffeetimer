@@ -1,0 +1,76 @@
+#include "Storage.h"
+#include "Arduino.h"
+
+
+Storage::Storage()
+{
+    if(!SPIFFS.begin(true))
+    {
+        Serial.println(F("SPIFFS Mount Failed"));
+        initializeConfig();
+    }
+
+    load();
+}
+
+void Storage::load()
+{
+    File file = SPIFFS.open("/cfg", FILE_READ);
+
+    if(!file || file.isDirectory())
+    {
+        Serial.println(F("- failed to open file for reading"));
+        initializeConfig();
+        return;
+    }
+
+    size_t bytes = file.read((uint8_t*)&_config, sizeof(_config));
+
+    if(bytes == 0)
+    {
+        initializeConfig();
+    }
+
+    Serial.print(F("Read "));
+    Serial.print(bytes);
+    Serial.println(F("from file."));
+
+    file.close();
+}
+
+void Storage::save()
+{
+    File file = SPIFFS.open("/cfg", FILE_WRITE);
+    if(!file)
+    {
+        Serial.println(F("- failed to open file for writing"));
+        return;
+    }
+
+    if(file.write((uint8_t *)&_config, sizeof(_config)))
+    {
+        Serial.println(F("- file written"));
+    } else {
+        Serial.println(F("- write failed"));
+    }
+    file.close();
+}
+
+void Storage::initializeConfig()
+{
+    for(int i=0; i< sizeof(_config.signature); i++)
+    {
+        _config.signature[i] = signature[i];
+    }
+    _config.duration = 5;
+}
+
+float Storage::duration()
+{
+    return _config.duration;
+}
+
+void Storage::setDuration(float value)
+{
+    _config.duration = value;
+}

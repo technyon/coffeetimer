@@ -2,19 +2,31 @@
 #include "Config.h"
 #include "Display.h"
 #include <src/AiEsp32RotaryEncoder.h>
+#include "Storage.h"
+
 
 Display* display;
 AiEsp32RotaryEncoder* encoder;
+Storage* storage;
+
+uint16_t duration = 1; // milliseconds
 
 void onEncoderButtonPressed()
 {
-
+    Serial.println("PRESS");
 }
 
 void setup()
 {
-	Serial.begin(9600);
+    Serial.begin(9600);
 	Serial.println("START");
+
+    storage = new Storage();
+
+    Serial.println(storage->duration());
+
+//    storage->setDuration(6.78);
+//    storage->save();
 
 	display = new Display();
 	display->initialize();
@@ -26,11 +38,11 @@ void setup()
             [] { encoder->readEncoder_ISR(); },
             onEncoderButtonPressed);
 
-    encoder->setBoundaries(0, 1000, true);
-    encoder->setAcceleration(250);
+    encoder->setBoundaries(10, 150, false);
+    encoder->setAcceleration(ROTARY_ENCODER_ACCELERATION);
 }
 
-void loop()
+void queryEncoder()
 {
     //dont print anything unless value changed
     if (!encoder->encoderChanged())
@@ -38,9 +50,20 @@ void loop()
         return;
     }
 
-    display->print(encoder->readEncoder());
+    display->setDuration((float)encoder->readEncoder() / 10);
+}
 
-    Serial.print("Value: ");
-    Serial.println(encoder->readEncoder());
-    delay(10);
+long lastDisplayUpdate = 0;
+
+void loop()
+{
+    queryEncoder();
+
+    long ts = millis();
+
+    if(ts - lastDisplayUpdate > 100)
+    {
+        display->update();
+        lastDisplayUpdate = ts;
+    }
 }

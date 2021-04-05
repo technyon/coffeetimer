@@ -14,9 +14,11 @@ public:
     void initialize();
     void update();
 
-    void print(long i);
+    const float duration();
+    void setDuration(const float value);
 
 private:
+    float _duration = 1;
 
     bool _isInitialized = false;
     Adafruit_SSD1306 _ssd1306;

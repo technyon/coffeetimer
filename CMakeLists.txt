@@ -21,7 +21,9 @@ add_executable(coffeetimer
         lib/Adafruit_SSD1306/Adafruit_SSD1306.cpp
         lib/ai-esp32-rotary-encoder/src/AiEsp32RotaryEncoder.cpp
         lib/ai-esp32-rotary-encoder/src/AiEsp32RotaryEncoderNumberSelector.cpp
-        Display.cpp Config.h)
+        Display.cpp
+        Config.h
+        Storage.cpp)
 
 # Arduino.h is included in hello_world.cpp, so link with Arduino core
 target_link_arduino_libraries(coffeetimer
@@ -29,6 +31,8 @@ target_link_arduino_libraries(coffeetimer
         core
         SPI
         Wire
+        SPIFFS
+        FS
 )
 
 # This is needed for the generation of HEX binary and uploading it

@@ -34,12 +34,18 @@ void Display::initialize()
 
 void Display::update()
 {
-}
-
-void Display::print(long value)
-{
     _ssd1306.clearDisplay();
     _ssd1306.setCursor(15, 40);
-    _ssd1306.print(value);
+    _ssd1306.print(_duration, 1);
     _ssd1306.display();
+}
+
+const float Display::duration()
+{
+    return _duration;
+}
+
+void Display::setDuration(const float value)
+{
+    _duration = value;
 }

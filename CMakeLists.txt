@@ -23,7 +23,8 @@ add_executable(coffeetimer
         lib/ai-esp32-rotary-encoder/src/AiEsp32RotaryEncoderNumberSelector.cpp
         Display.cpp
         Config.h
-        Storage.cpp)
+        Storage.cpp
+        MotorControl.cpp)
 
 # Arduino.h is included in hello_world.cpp, so link with Arduino core
 target_link_arduino_libraries(coffeetimer

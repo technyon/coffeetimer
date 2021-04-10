@@ -3,11 +3,13 @@
 #include "Display.h"
 #include <src/AiEsp32RotaryEncoder.h>
 #include "Storage.h"
+#include "MotorControl.h"
 
 
 Display* display;
 AiEsp32RotaryEncoder* encoder;
 Storage* storage;
+MotorControl* motorControl;
 
 uint16_t duration = 1; // milliseconds
 
@@ -18,15 +20,20 @@ void onEncoderButtonPressed()
 
 void setup()
 {
+    pinMode(START_BUTTON_PIN, INPUT_PULLUP);
+    motorControl = new MotorControl();
+
     Serial.begin(9600);
 	Serial.println("START");
 
     storage = new Storage();
 
     Serial.println(storage->duration());
-
 //    storage->setDuration(6.78);
 //    storage->save();
+
+
+
 
 	display = new Display();
 	display->initialize();
@@ -66,4 +73,15 @@ void loop()
         display->update();
         lastDisplayUpdate = ts;
     }
+
+    if(digitalRead(START_BUTTON_PIN) == LOW)
+    {
+        motorControl->start();
+    }
+    else
+    {
+        motorControl->stop();
+    }
+
+    motorControl->update();
 }

@@ -40,6 +40,8 @@ void Storage::load()
 
 void Storage::save()
 {
+    if(!_config._isDirty) return;
+
     File file = SPIFFS.open("/cfg", FILE_WRITE);
     if(!file)
     {
@@ -54,6 +56,8 @@ void Storage::save()
         Serial.println(F("- write failed"));
     }
     file.close();
+
+    _config._isDirty = false;
 }
 
 void Storage::initializeConfig()
@@ -73,4 +77,5 @@ float Storage::duration()
 void Storage::setDuration(float value)
 {
     _config.duration = value;
+    _config._isDirty = true;
 }

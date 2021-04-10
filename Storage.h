@@ -7,6 +7,7 @@ struct Config
 {
     char signature[9];
     float duration;
+    bool _isDirty = false;
 };
 
 class Storage

@@ -55,7 +55,10 @@ void queryEncoder()
         return;
     }
 
-    display->setDuration((float)encoder->readEncoder() / 10);
+    float duration = (float)encoder->readEncoder() / 10;
+    display->setDuration(duration);
+    motorControl->setDuration(duration);
+    storage->setDuration(duration);
 }
 
 long lastDisplayUpdate = 0;
@@ -75,6 +78,7 @@ void loop()
     if(digitalRead(START_BUTTON_PIN) == LOW)
     {
         motorControl->start();
+        storage->save();
     }
     else
     {

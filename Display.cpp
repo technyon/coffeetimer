@@ -1,5 +1,6 @@
 #include "Display.h"
 #include <Fonts/FreeSans12pt7b.h>
+#include <Fonts/FreeSans24pt7b.h>
 #include <Arduino.h>
 
 Display::Display(MotorControl* motorControl)
@@ -22,7 +23,7 @@ void Display::initialize()
     {
         _ssd1306.dim(false);
 
-        _ssd1306.setFont(&FreeSans12pt7b);
+        _ssd1306.setFont(&FreeSans24pt7b);
         _ssd1306.setTextColor(SSD1306_WHITE);
 
         _ssd1306.clearDisplay();
@@ -35,9 +36,11 @@ void Display::initialize()
 
 void Display::update()
 {
+    float value = _motorControl->timeLeft() == -1 ? _duration : _motorControl->timeLeft();
+
     _ssd1306.clearDisplay();
-    _ssd1306.setCursor(15, 40);
-    _ssd1306.print(_motorControl->timeLeft() == -1 ? _duration : _motorControl->timeLeft(), 1);
+    _ssd1306.setCursor(value < 10 ? 30 : 20, 55);
+    _ssd1306.print(value, 1);
     _ssd1306.display();
 }
 

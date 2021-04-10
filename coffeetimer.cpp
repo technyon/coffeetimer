@@ -29,13 +29,8 @@ void setup()
     storage = new Storage();
 
     Serial.println(storage->duration());
-//    storage->setDuration(6.78);
-//    storage->save();
 
-
-
-
-	display = new Display();
+	display = new Display(motorControl);
 	display->initialize();
 
     encoder = new AiEsp32RotaryEncoder(ROTARY_ENCODER_A_PIN, ROTARY_ENCODER_B_PIN, ROTARY_ENCODER_BUTTON_PIN, ROTARY_ENCODER_VCC_PIN, ROTARY_ENCODER_STEPS);
@@ -47,6 +42,9 @@ void setup()
 
     encoder->setBoundaries(10, 150, false);
     encoder->setAcceleration(ROTARY_ENCODER_ACCELERATION);
+
+    encoder->setEncoderValue(storage->duration() * 10);
+    motorControl->setDuration(storage->duration());
 }
 
 void queryEncoder()

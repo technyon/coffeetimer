@@ -11,13 +11,26 @@ MotorControl::MotorControl()
 void MotorControl::start()
 {
 //    Serial.println("START");
-    digitalWrite(RELAIS_PIN, LOW);
+    if(_endMillis == -1)
+    {
+        enableRelais();
+        _endMillis = millis() + 1000 * _duration;
+    }
+    else
+    {
+        _timeLeft = _endMillis >= millis() ? (_endMillis - millis()) / (float)1000 : 0;
+        if(millis() >= _endMillis)
+        {
+            disableRelais();
+        }
+    }
 }
 
 void MotorControl::stop()
 {
-//    Serial.println("STOP");
-    digitalWrite(RELAIS_PIN, HIGH);
+    _endMillis = -1;
+    _timeLeft = -1;
+    disableRelais();
 }
 
 void MotorControl::setDuration(const long& value)
@@ -28,4 +41,19 @@ void MotorControl::setDuration(const long& value)
 void MotorControl::update()
 {
 
+}
+
+void MotorControl::enableRelais()
+{
+    digitalWrite(RELAIS_PIN, LOW);
+}
+
+void MotorControl::disableRelais()
+{
+    digitalWrite(RELAIS_PIN, HIGH);
+}
+
+float MotorControl::timeLeft()
+{
+    return _timeLeft;
 }

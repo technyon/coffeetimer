@@ -11,7 +11,14 @@ public:
     void update();
 
     void setDuration(const long& value);  // milliseconds
+    float timeLeft(); // milliseconds
 
 private:
+    void enableRelais();
+    void disableRelais();
+
     float _duration = -1;
+    float _timeLeft;
+
+    long _endMillis = -1;
 };

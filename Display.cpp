@@ -2,8 +2,9 @@
 #include <Fonts/FreeSans12pt7b.h>
 #include <Arduino.h>
 
-Display::Display()
-: _ssd1306(128, 64, &Wire, -1)
+Display::Display(MotorControl* motorControl)
+: _ssd1306(128, 64, &Wire, -1),
+  _motorControl(motorControl)
 {
 
 }
@@ -36,7 +37,7 @@ void Display::update()
 {
     _ssd1306.clearDisplay();
     _ssd1306.setCursor(15, 40);
-    _ssd1306.print(_duration, 1);
+    _ssd1306.print(_motorControl->timeLeft() == -1 ? _duration : _motorControl->timeLeft(), 1);
     _ssd1306.display();
 }
 

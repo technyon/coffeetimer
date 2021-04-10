@@ -4,11 +4,12 @@
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
+#include "MotorControl.h"
 
 class Display
 {
 public:
-    explicit Display();
+    explicit Display(MotorControl* motorControl);
     virtual ~Display() = default;
 
     void initialize();
@@ -22,4 +23,5 @@ private:
 
     bool _isInitialized = false;
     Adafruit_SSD1306 _ssd1306;
+    MotorControl* _motorControl;
 };

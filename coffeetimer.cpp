@@ -40,7 +40,7 @@ void setup()
             [] { encoder->readEncoder_ISR(); },
             onEncoderButtonPressed);
 
-    encoder->setBoundaries(10, 150, false);
+    encoder->setBoundaries(MINIMUM_DURATION * 10, MAXIMUM_DURATION * 10, false);
     encoder->setAcceleration(ROTARY_ENCODER_ACCELERATION);
 
     encoder->setEncoderValue(storage->duration() * 10);

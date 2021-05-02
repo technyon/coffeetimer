@@ -5,7 +5,7 @@
 MotorControl::MotorControl()
 {
     pinMode(RELAIS_PIN, OUTPUT);
-    digitalWrite(RELAIS_PIN, HIGH);
+    disableRelais();
 }
 
 void MotorControl::start()
@@ -45,12 +45,12 @@ void MotorControl::update()
 
 void MotorControl::enableRelais()
 {
-    digitalWrite(RELAIS_PIN, LOW);
+    digitalWrite(RELAIS_PIN, HIGH);
 }
 
 void MotorControl::disableRelais()
 {
-    digitalWrite(RELAIS_PIN, HIGH);
+    digitalWrite(RELAIS_PIN, LOW);
 }
 
 float MotorControl::timeLeft()

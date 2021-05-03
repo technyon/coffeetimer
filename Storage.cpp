@@ -36,6 +36,8 @@ void Storage::load()
     Serial.println(F("from file."));
 
     file.close();
+
+    _config._isDirty = false;
 }
 
 void Storage::save()
@@ -62,6 +64,7 @@ void Storage::save()
 
 void Storage::initializeConfig()
 {
+    Serial.println("No valid config found. Initializing with default values.");
     for(int i=0; i< sizeof(_config.signature); i++)
     {
         _config.signature[i] = signature[i];
@@ -76,6 +79,9 @@ float Storage::duration()
 
 void Storage::setDuration(float value)
 {
-    _config.duration = value;
-    _config._isDirty = true;
+    if(_config.duration != value)
+    {
+        _config.duration = value;
+        _config._isDirty = true;
+    }
 }

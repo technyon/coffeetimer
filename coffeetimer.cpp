@@ -59,7 +59,7 @@ void queryEncoder()
         return;
     }
 
-    float duration = (float)encoder->readEncoder() / 10;
+    float duration = (float)encoder->readEncoder() / (float)10;
     display->setDuration(duration);
     motorControl->setDuration(duration);
     storage->setDuration(duration);
@@ -73,7 +73,7 @@ void loop()
 
     long ts = millis();
 
-    if(ts - lastDisplayUpdate > 100)
+    if(ts - lastDisplayUpdate > 30)
     {
         display->update();
         lastDisplayUpdate = ts;

@@ -10,7 +10,7 @@ public:
     void stop();
     void update();
 
-    void setDuration(const long& value);  // milliseconds
+    void setDuration(const float& value);  // milliseconds
 
     float timeLeft(); // milliseconds
     bool isRelaisEnabled();

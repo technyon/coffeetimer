@@ -14,11 +14,12 @@ void MotorControl::start()
     if(_endMillis == -1)
     {
         enableRelais();
-        _endMillis = millis() + 1000 * _duration;
+        _endMillis = millis() + (long)((float)1000 * _duration);
     }
     else
     {
         _timeLeft = _endMillis >= millis() ? (_endMillis - millis()) / (float)1000 : 0;
+//        Serial.println(_timeLeft);
         if(millis() >= _endMillis)
         {
             disableRelais();
@@ -33,7 +34,7 @@ void MotorControl::stop()
     disableRelais();
 }
 
-void MotorControl::setDuration(const long& value)
+void MotorControl::setDuration(const float& value)
 {
     _duration = value;
 }

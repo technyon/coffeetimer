@@ -15,6 +15,10 @@ uint16_t duration = 1; // milliseconds
 
 void onEncoderButtonPressed()
 {
+    if(motorControl->isRelaisEnabled())
+    {
+        return;
+    }
     Serial.println("PRESS");
 }
 
@@ -77,12 +81,14 @@ void loop()
 
     if(digitalRead(START_BUTTON_PIN) == LOW)
     {
+        encoder->disable();
         motorControl->start();
         storage->save();
     }
     else
     {
         motorControl->stop();
+        encoder->enable();
     }
 
     motorControl->update();

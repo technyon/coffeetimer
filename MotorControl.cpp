@@ -45,15 +45,22 @@ void MotorControl::update()
 
 void MotorControl::enableRelais()
 {
+    _isEnabled = true;
     digitalWrite(RELAIS_PIN, HIGH);
 }
 
 void MotorControl::disableRelais()
 {
     digitalWrite(RELAIS_PIN, LOW);
+    _isEnabled= false;
 }
 
 float MotorControl::timeLeft()
 {
     return _timeLeft;
+}
+
+bool MotorControl::isRelaisEnabled()
+{
+    return _isEnabled;
 }

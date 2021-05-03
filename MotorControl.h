@@ -11,7 +11,9 @@ public:
     void update();
 
     void setDuration(const long& value);  // milliseconds
+
     float timeLeft(); // milliseconds
+    bool isRelaisEnabled();
 
 private:
     void enableRelais();
@@ -19,6 +21,7 @@ private:
 
     float _duration = -1;
     float _timeLeft;
+    bool _isEnabled = false;
 
     long _endMillis = -1;
 };

@@ -10,6 +10,8 @@ include_directories(lib/ai-esp32-rotary-encoder)
 file(GLOB SRCFILES
 #        "Lib/FreeRTOS/src/*.c"
 #        "Lib/FreeRTOS/src/*.cpp"
+        "lib/EasingLibrary/*.cpp"
+        "lib/EasingLibrary/*.h"
         "lib/Adafruit_BusIO/*.cpp"
         "lib/Adafruit_GFX/*.cpp"
 )
@@ -24,7 +26,9 @@ add_executable(coffeetimer
         Display.cpp
         Config.h
         Storage.cpp
-        MotorControl.cpp)
+        MotorControl.cpp
+        resources/bitmaps_grinder.h
+)
 
 # Arduino.h is included in hello_world.cpp, so link with Arduino core
 target_link_arduino_libraries(coffeetimer

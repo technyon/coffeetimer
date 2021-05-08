@@ -15,7 +15,7 @@ uint16_t duration = 1; // milliseconds
 
 void onEncoderButtonPressed()
 {
-    if(motorControl->isRelaisEnabled())
+    if(motorControl->currentState() != MotorControlState::Off)
     {
         return;
     }
@@ -25,7 +25,11 @@ void onEncoderButtonPressed()
 void setup()
 {
     pinMode(START_BUTTON_PIN, INPUT_PULLUP);
-    motorControl = new MotorControl();
+
+    display = new Display();
+    display->initialize();
+
+    motorControl = new MotorControl(display);
 
     Serial.begin(9600);
 	Serial.println("START");
@@ -34,8 +38,6 @@ void setup()
 
     Serial.println(storage->duration());
 
-	display = new Display(motorControl);
-	display->initialize();
 
     encoder = new AiEsp32RotaryEncoder(ROTARY_ENCODER_A_PIN, ROTARY_ENCODER_B_PIN, ROTARY_ENCODER_BUTTON_PIN, ROTARY_ENCODER_VCC_PIN, ROTARY_ENCODER_STEPS);
     encoder->begin();
@@ -73,7 +75,7 @@ void loop()
 
     long ts = millis();
 
-    if(ts - lastDisplayUpdate > 30)
+    if(ts - lastDisplayUpdate > 50)
     {
         display->update();
         lastDisplayUpdate = ts;
@@ -81,14 +83,21 @@ void loop()
 
     if(digitalRead(START_BUTTON_PIN) == LOW)
     {
-        encoder->disable();
-        motorControl->start();
+        motorControl->buttonPressed();
         storage->save();
     }
     else
     {
-        motorControl->stop();
+        motorControl->buttonReleased();
+    }
+
+    if(motorControl->currentState() == MotorControlState::Off)
+    {
         encoder->enable();
+    }
+    else
+    {
+        encoder->disable();
     }
 
     motorControl->update();

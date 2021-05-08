@@ -40,19 +40,22 @@ You need:
 - A big capacitor to stabilize the power supply for the ESP (I used 4700 µF), less might work
 - Cold appliance socket
 - M3 and M2 screws, nuts and washers
-- Copper tape for EMI shielding 
+- Copper tape for EMI shielding
+- Feet for the new base
 
 These are the parts I used:
 - ESP32 D1 mini: https://www.amazon.de/gp/product/B08BTLYSTM/
 - SSD1306 OLED: https://www.amazon.de/gp/product/B0777HHQDT/
 - Relais: https://www.amazon.de/gp/product/B07V1X2RSP/
 - Rotary encoder: https://www.ebay.de/itm/283974309391 (any other should work, just check it's the right size)
+- Cold appliance socket: https://www.amazon.de/gp/product/B004S7RWSY/
+- Base feet: https://www.amazon.de/gp/product/B07D4GHGR3/
 
 # Wiring
 
 - The rotary encoder connects to 3.3V and Pins 26 and 27
 - The rotary encoder push button connects to ground and pin 33
-- The Relais connects to pin 25
+- The Relais connects to 5v, GND and pin 25
 - The grinders switch connects to GND and pin 32
 - The display connects to 3.3v, GND, and I2c (Pin 21 for SDA, Pin 22 for SCL)
 

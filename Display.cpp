@@ -7,7 +7,7 @@
 #include "resources/bitmaps_grinder.h"
 
 Display::Display()
-: _statusLineEase(ease_mode::EASE_OUT_QUAD, 500),
+: _statusLineEase(ease_mode::EASE_IN_OUT_QUAD, 500),
   _ssd1306(128, 64, &Wire, -1)
 {
 
@@ -168,6 +168,4 @@ void Display::easeStatusLine(long duration, int16_t targetLength)
     _statusLineEase.Init(_currentStatusLineLength);
     _statusLineEase.SetMillisInterval(duration);
     _statusLineEase.SetSetpoint(targetLength);
-    //    _statusLineEase.setDuration((double)(_statusLineEaseEndTime - _statusLineEaseStartTime) / (double)1000);
-//    _statusLineEase.setTotalChangeInPosition(_statusLineEaseEndTime - _statusLineEaseStartTime - _currentStatusLineLength);
 }

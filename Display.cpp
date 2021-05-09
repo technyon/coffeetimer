@@ -7,7 +7,8 @@
 #include "resources/bitmaps_grinder.h"
 
 Display::Display()
-: _ssd1306(128, 64, &Wire, -1)
+: _statusLineEase(ease_mode::EASE_OUT_QUAD, 500),
+  _ssd1306(128, 64, &Wire, -1)
 {
 
 }
@@ -154,29 +155,19 @@ void Display::drawStatusLine()
 {
     int16_t statusLinelength;
 
-    if(millis() > _statusLineEaseEndTime)
-    {
-        _ssd1306.drawFastHLine(STATUS_LINE_X, STATUS_LINE_Y, _currentStatusLineLength, SSD1306_WHITE);
-        _ssd1306.drawFastHLine(STATUS_LINE_X, STATUS_LINE_Y+1, _currentStatusLineLength, SSD1306_WHITE);
-    }
-    else
-    {
-        double t = (((double) millis() - (double) _statusLineEaseStartTime) / (double) 1000);
-        statusLinelength = _statusLineEaseStartLength + _statusLineEase.easeInOut(t);
+    statusLinelength = _statusLineEase.GetValue();
 
-        _ssd1306.drawFastHLine(STATUS_LINE_X, STATUS_LINE_Y, statusLinelength, SSD1306_WHITE);
-        _ssd1306.drawFastHLine(STATUS_LINE_X, STATUS_LINE_Y+1, statusLinelength, SSD1306_WHITE);
+    _ssd1306.drawFastHLine(STATUS_LINE_X, STATUS_LINE_Y, statusLinelength, SSD1306_WHITE);
+    _ssd1306.drawFastHLine(STATUS_LINE_X, STATUS_LINE_Y+1, statusLinelength, SSD1306_WHITE);
 
-        _currentStatusLineLength = statusLinelength;
-    }
+    _currentStatusLineLength = statusLinelength;
 }
 
 void Display::easeStatusLine(long duration, int16_t targetLength)
 {
-    _statusLineEaseStartTime = millis();
-    _statusLineEaseEndTime = _statusLineEaseStartTime + duration;
-
-    _statusLineEase.setDuration((double)(_statusLineEaseEndTime - _statusLineEaseStartTime) / (double)1000);
-    _statusLineEase.setTotalChangeInPosition(targetLength - _currentStatusLineLength);
-    _statusLineEaseStartLength = _currentStatusLineLength;
+    _statusLineEase.Init(_currentStatusLineLength);
+    _statusLineEase.SetMillisInterval(duration);
+    _statusLineEase.SetSetpoint(targetLength);
+    //    _statusLineEase.setDuration((double)(_statusLineEaseEndTime - _statusLineEaseStartTime) / (double)1000);
+//    _statusLineEase.setTotalChangeInPosition(_statusLineEaseEndTime - _statusLineEaseStartTime - _currentStatusLineLength);
 }

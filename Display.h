@@ -4,7 +4,7 @@
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
-#include "lib/EasingLibrary/SineEase.h"
+#include "lib/Arduino-Easing/src/EasingLib.h"
 
 #define GRINDER_X_POS 0
 #define GRINDER_Y_POS -1
@@ -47,12 +47,8 @@ private:
     float _timeLeft = 0;
     int _progress = 100;
 
-    double _statusLineLength = 0;
-    SineEase _statusLineEase;
-    long _statusLineEaseStartTime;
-    long _statusLineEaseEndTime;
+    Easing _statusLineEase;
     int16_t _currentStatusLineLength = 0;
-    int16_t _statusLineEaseStartLength = 0;
 
     bool _grinderEnabled = false;
     uint8_t _grinderActiveAnimationIndex = 0;

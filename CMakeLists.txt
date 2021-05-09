@@ -10,8 +10,8 @@ include_directories(lib/ai-esp32-rotary-encoder)
 file(GLOB SRCFILES
 #        "Lib/FreeRTOS/src/*.c"
 #        "Lib/FreeRTOS/src/*.cpp"
-        "lib/EasingLibrary/*.cpp"
-        "lib/EasingLibrary/*.h"
+        "lib/Arduino-Easing/src/*.cpp"
+        "lib/Arduino-Easing/src/*.h"
         "lib/Adafruit_BusIO/*.cpp"
         "lib/Adafruit_GFX/*.cpp"
 )

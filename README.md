@@ -43,7 +43,7 @@ You need:
 - A USB Power Supply.
 - An SSD1306 OLED display
 - A rotary encoder
-- A big capacitor to stabilize the power supply for the ESP (I used 4700 µF), less might work
+- A big capacitor to stabilize the power supply for the ESP (I used 4700 µF, less might work)
 - Cold appliance socket
 - M3 and M2 screws, nuts and washers
 - Copper tape for EMI shielding

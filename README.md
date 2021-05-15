@@ -1,5 +1,11 @@
 # coffeetimer
-My coffee grinder, the Macap M2D has two problems
+My coffee grinder, the Macap M2D has an adjustable timer built-in. However, some genius of product designer but the knob to adjust the time at the bottom side of the grinder. To adjust it you have to lift the device (which is quite heave), and then adjust it, usually holding it in an awkward position.
+
+To remedy this, I added a microcontroller with a display and a rotary encoder. As a plus, time can now be adjusted with 100 millisecond accuracy, as opposed to the unreliable built-in method which uses an analog potentiometer.
+
+This project includes the firmware for the microcontroller and 3D-printed parts which replace the bottom part of the grinder. The display and rotary encoder are mounted on the right side of the grinder.
+
+If you need help building this, don't hesitate to ask.
 
 # A word of caution
 

@@ -1,7 +1,7 @@
 #include "Arduino.h"
 #include "Config.h"
 #include "Display.h"
-#include <src/AiEsp32RotaryEncoder.h>
+#include <AiEsp32RotaryEncoder.h>
 #include "Storage.h"
 #include "MotorControl.h"
 

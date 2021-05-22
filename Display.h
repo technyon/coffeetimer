@@ -4,7 +4,7 @@
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
-#include "lib/Arduino-Easing/src/EasingLib.h"
+#include <EasingLib.h>
 
 #define GRINDER_X_POS 0
 #define GRINDER_Y_POS -1

@@ -6,6 +6,8 @@ include_directories(lib/Adafruit_BusIO)
 include_directories(lib/Adafruit_GFX)
 include_directories(lib/Adafruit_SSD1306)
 include_directories(lib/ai-esp32-rotary-encoder)
+include_directories(lib/ai-esp32-rotary-encoder/src/)
+include_directories(lib/Arduino-Easing/src/)
 
 file(GLOB SRCFILES
 #        "Lib/FreeRTOS/src/*.c"

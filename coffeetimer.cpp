@@ -11,8 +11,6 @@ AiEsp32RotaryEncoder* encoder;
 Storage* storage;
 MotorControl* motorControl;
 
-uint16_t duration = 1; // milliseconds
-
 void onEncoderButtonPressed()
 {
     if(motorControl->currentState() != MotorControlState::Off)

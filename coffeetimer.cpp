@@ -6,6 +6,7 @@
 #include "MotorControl.h"
 
 
+
 Display* display;
 AiEsp32RotaryEncoder* encoder;
 Storage* storage;

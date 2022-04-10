@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.0.0)
 
+set(ARDUINO_BOARD "ESP32 Dev Module [esp32.esp32]")
+
 project(coffeetimer CXX)
 
 include_directories(lib/Adafruit_BusIO)

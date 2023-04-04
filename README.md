@@ -18,7 +18,7 @@ Also, please read the paragraph about liability in the provided LICENSE file.
 ### Prerequisites
 - Arduino SDK. Unpack and set ARDUINO_SDK_PATH to its location (e. g. export ARDUINO_SDK_PATH="/usr/share/arduino-1.8.13/")
 - ESP32 SDK for Arduino: https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json. Add the URL in the Arduino SDK board manager and enable the ESP32 SDK (Version 1.0.6 as ofo the time of writing)
-- Arduino cmake toolchain: https://github.com/a9183756-gh/Arduino-CMake-Toolchain/. Unpack to a location of your choice
+- Arduino cmake toolchain: https://github.com/technyon/Arduino-CMake-Toolchain. Unpack to a location of your choice
 - cmake
 
 ### Running cmake
